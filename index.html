@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <title>Train Time</title>
+</head>
+<body>
+    <div id="main-container" class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="jumbotron">
+                    <h1 class="display-4"> <i aria-hidden="true"></i>It's Train Time</h1>
+                    <p>Chugga Chugga. Choo Choo.</p>
+                  </div>
+            </div>
+        </div>
+        <div class="card">
+        <div class="card-header"><i aria-hidden="true"></i>Add Train</div>
+        <div class="row">
+            <div class="col">
+                <form>
+                    <div class="form-group" id="searchBox">
+                      <label for="exampleFormControlInput1">Train Name</label>
+                      <input type="text" required class="form-control" id="exampleFormControlInput1">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Destination</label>
+                      <input type="text" class="form-control" id="exampleFormControlInput1">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect2">First Train Time</label>
+                      <input type="time" class="form-control" id="exampleFormControlInput1">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Frequency (min)</label>
+                      <input type="number" class="form-control" id="exampleFormControlInput1">
+                    </div>
+                  </form> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"><button id="search"><i aria-hidden="true"></i> Submit</button></div>
+        </div>
+    
+</body>
+</html>
