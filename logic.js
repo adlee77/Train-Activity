@@ -33,6 +33,20 @@ $("#search-button").on("click", function (event) {
     console.log(trainInfo.frequency)
 
     database.ref().push(trainInfo);
+});
+database.ref().on("child_added", function(childSnapshot) {
+    console.log(childSnapshot.val());
+  
+    var train1 = childSnapshot.val().trainName;
+    var train2 = childSnapshot.val().destination;
+    var train3 = childSnapshot.val().firstTrain;
+    var train4 = childSnapshot.val().frequency;
 
-
-})
+    var newRow = $("<tr>").append(
+        $("<td>").text(train1),
+        $("<td>").text(train2),
+        $("<td>").text(train4),
+        $("<td>").text(empMonths),
+        $("<td>").text(),
+        $("<td>").text()
+});
