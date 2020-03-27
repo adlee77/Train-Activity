@@ -1,17 +1,21 @@
-var config = {
+var firebaseConfig = {
     apiKey: "AIzaSyC0MPqgBEWyP4t721OY2MIAazFxxL5ita0",
-    authDomain: "time-sheet-55009.firebaseapp.com",
-    databaseURL: "https://time-sheet-55009.firebaseio.com",
-    storageBucket: "time-sheet-55009.appspot.com"
-  };
-  
-  firebase.initializeApp(config);
-  
-  var database = firebase.database();
+    authDomain: "cool-project-81445.firebaseapp.com",
+    databaseURL: "https://cool-project-81445.firebaseio.com",
+    projectId: "cool-project-81445",
+    storageBucket: "cool-project-81445.appspot.com",
+    messagingSenderId: "1010852977343",
+    appId: "1:1010852977343:web:a35d01b82b58cdac5b840a"
+};
 
-  $("#search-button").on("click", function(event) {
+firebase.initializeApp(firebaseConfig);
 
-    var train1= $("#trainN").val().trim();
+
+var database = firebase.database();
+
+$("#search-button").on("click", function (event) {
+
+    var train1 = $("#trainN").val().trim();
     var train2 = $("#dest").val().trim();
     var train3 = moment($("#trainT").val().trim(), "hh:mm a").format("hh:mm a");
     var train4 = $("#freq").val().trim();
@@ -24,6 +28,11 @@ var config = {
     };
 
     console.log(trainInfo.trainName)
+    console.log(trainInfo.destination)
+    console.log(trainInfo.firstTrain)
+    console.log(trainInfo.frequency)
+
+    database.ref().push(trainInfo);
 
 
-  })
+})
