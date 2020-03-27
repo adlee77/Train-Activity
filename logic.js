@@ -41,12 +41,17 @@ database.ref().on("child_added", function(childSnapshot) {
     var train2 = childSnapshot.val().destination;
     var train3 = childSnapshot.val().firstTrain;
     var train4 = childSnapshot.val().frequency;
+    var nextArrival = moment().add(train3, 'minutes');
+    var minutes = nextArrival - train3;
 
     var newRow = $("<tr>").append(
         $("<td>").text(train1),
         $("<td>").text(train2),
         $("<td>").text(train4),
         $("<td>").text(empMonths),
-        $("<td>").text(),
-        $("<td>").text()
+        $("<td>").text(nextArrival),
+        $("<td>").text(minutes)
+    );
+
+        $("#train-table > tbody").append(newRow);
 });
