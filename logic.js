@@ -17,7 +17,7 @@ $("#search-button").on("click", function (event) {
 
     var train1 = $("#trainN").val().trim();
     var train2 = $("#dest").val().trim();
-    var train3 = moment($("#trainT").val().trim(), "hh:mm a").format("hh:mm a");
+    var train3 = moment($("#trainT").val().trim(), "HH:mm").format("HH:mm");
     var train4 = $("#freq").val().trim();
 
     var trainInfo = {
@@ -34,24 +34,53 @@ $("#search-button").on("click", function (event) {
 
     database.ref().push(trainInfo);
 });
-database.ref().on("child_added", function(childSnapshot) {
-    console.log(childSnapshot.val());
-  
-    var train1 = childSnapshot.val().trainName;
-    var train2 = childSnapshot.val().destination;
-    var train3 = childSnapshot.val().firstTrain;
-    var train4 = childSnapshot.val().frequency;
-    var nextArrival = moment().add(train3, 'minutes');
-    var minutes = nextArrival - train3;
 
-    var newRow = $("<tr>").append(
-        $("<td>").text(train1),
-        $("<td>").text(train2),
-        $("<td>").text(train4),
-        $("<td>").text(empMonths),
-        $("<td>").text(nextArrival),
-        $("<td>").text(minutes)
-    );
 
-        $("#train-table > tbody").append(newRow);
-});
+function loadTable() {
+    $("tbody").empty()
+
+    database.ref().on("child_added", function (childSnapshot) {
+        console.log(childSnapshot.val());
+
+
+        var train1 = childSnapshot.val().trainName;
+        var train2 = childSnapshot.val().destination;
+        // var train3 = childSnapshot.val().firstTrain;
+
+
+        var tFrequency = childSnapshot.val().frequency;
+
+        // Time is 3:30 AM
+        var firstTime = childSnapshot.val().firstTrain;
+
+        // First Time (pushed back 1 year to make sure it comes before current time)
+        var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+
+        // Difference between the times
+        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+
+        // Time apart (remainder)
+        var tRemainder = diffTime % tFrequency;
+
+
+        // Minute Until Train
+        var minutesAway = tFrequency - tRemainder;
+
+        // Next Train
+        var nextTrain = moment().add(minutesAway, "minutes");
+
+        nextTrain = moment(nextTrain).format("hh:mm a")
+
+        var newRow = $("<tr>").append(
+            $("<td>").text(train1),
+            $("<td>").text(train2),
+            $("<td>").text(tFrequency),
+            $("<td>").text(nextTrain),
+            $("<td>").text(minutesAway)
+        );
+
+        $("tbody").append(newRow);
+    });
+}
+loadTable()
+setInterval(loadTable, 60000);
