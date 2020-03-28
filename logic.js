@@ -45,28 +45,19 @@ function loadTable() {
 
         var train1 = childSnapshot.val().trainName;
         var train2 = childSnapshot.val().destination;
-        // var train3 = childSnapshot.val().firstTrain;
-
 
         var tFrequency = childSnapshot.val().frequency;
 
-        // Time is 3:30 AM
         var firstTime = childSnapshot.val().firstTrain;
 
-        // First Time (pushed back 1 year to make sure it comes before current time)
         var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
 
-        // Difference between the times
         var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
 
-        // Time apart (remainder)
         var tRemainder = diffTime % tFrequency;
 
-
-        // Minute Until Train
         var minutesAway = tFrequency - tRemainder;
 
-        // Next Train
         var nextTrain = moment().add(minutesAway, "minutes");
 
         nextTrain = moment(nextTrain).format("hh:mm a")
